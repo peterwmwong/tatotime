@@ -1,0 +1,21 @@
+@import './pos';
+@import './colors';
+
+border-tri(borderSize = 10px, borderColor = #555)
+  content ""
+  display block
+  border-color borderColor transparent transparent transparent
+  border-style solid
+  border-width borderSize
+  height 0
+  width 0
+  z-index 2 
+
+triangle(size=8px,fgcolor,bordercolor,t=0px,r=0px,b=0px,l=0px)
+  &:before
+    abspos t r b l
+    border-tri size bordercolor
+
+  &:after
+    abspos (t - 1px) r b (l + 1px)
+    border-tri (size - 1px) fgcolor
