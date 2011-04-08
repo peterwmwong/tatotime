@@ -15,6 +15,7 @@ E = console.error.bind console
 emptyBuf = new Buffer ""
 
 L "--- Populating the database ---"
+insertQuery = "INSERT INTO showInfo SET sid=?, title=?, isRerun=?, ep=?, network=?, datetime=?"
 
 http.get
   host: 'services.tvrage.com'
@@ -28,22 +29,17 @@ http.get
       if err then return E 'ERROR: ', err
       try
         for day in result.DAY
-          _d = day['@'].attr
           for t in [].concat day.time
-            _t = t['@'].attr
+            d = new Date "#{day['@'].attr} #{t['@'].attr}"
             for s in [].concat t.show
               title = s['@'].name
-              d = new Date("#{_d} #{_t}")
-              tsString = d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()+' '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()
-              client.query "INSERT INTO showInfo SET sid=?, title=?, isRerun=?, ep=?, network=?, datetime=?", [
-                s.sid, title, false, s.ep, s.network, tsString
-              ]
-              L "#{_d} #{_t} #{title}"
+              client.query insertQuery,
+                [s.sid, title, false, s.ep, s.network,"#{d.getFullYear()}-#{d.getMonth()}-#{d.getDate()} #{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"]
+              L "#{d} #{title}"
       catch ex
         L "Exception: ",ex
       finally
         client.end()
-      return
 
     res.on 'data', (data)-> parser.parseBuffer data, false
     res.on 'end', -> parser.parseBuffer emptyBuf, true
