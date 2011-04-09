@@ -1,44 +1,54 @@
 (function() {
   define(function() {
+    var toDateTime;
+    toDateTime = function(d) {
+      d = new Date(d);
+      return "" + (d.getUTCFullYear()) + "-" + (d.getUTCMonth() + 1) + "-" + (d.getUTCDate()) + " " + (d.getUTCHours()) + ":" + (d.getUTCMinutes()) + ":" + (d.getUTCSeconds());
+    };
     return {
-      getShows: function(done) {
-        return done((function() {
-          return {
-            yesterday: [
+      getShows: function(from, to, done) {
+        return done([
+          {
+            date: '2011-04-04',
+            shows: [
               {
-                name: 'Nikita',
-                time: '2011-04-04 20:30:00',
+                title: 'Nikita',
+                datetime: '2011-04-04 20:30:00',
                 network: 'CW'
               }, {
-                name: 'Hellcats',
-                time: '2011-04-04 21:30:00',
+                title: 'Hellcats',
+                datetime: '2011-04-04 21:30:00',
                 network: 'CW'
               }
-            ],
-            today: [
+            ]
+          }, {
+            date: '2011-04-05',
+            shows: [
               {
-                name: 'The Event',
-                time: '2011-04-05 21:00:00',
+                title: 'The Event',
+                datetime: '2011-04-05 21:00:00',
                 network: 'NBC'
               }, {
-                name: 'The Vampire Diaries slkdjflksdjf sldkfjls dflkjfdlkj sldkfj slkfjl sldkfj',
-                time: '2011-04-05 22:00:00',
+                title: 'The Vampire Diaries slkdjflksdjf sldkfjls dflkjfdlkj sldkfj slkfjl sldkfj',
+                datetime: '2011-04-05 22:00:00',
                 network: 'CW'
               }
-            ],
-            tomorrow: [
+            ]
+          }, {
+            date: '2011-04-05',
+            shows: [
               {
-                name: 'Entourage',
-                time: '2011-04-06 22:00:00',
+                title: 'Entourage',
+                datetime: '2011-04-06 22:00:00',
                 network: 'HBO'
               }, {
-                name: 'True Blood',
-                time: '2011-04-06 23:30:00',
+                title: 'True Blood',
+                datetime: '2011-04-06 23:30:00',
                 network: 'HBO'
               }
             ]
-          };
-        })());
+          }
+        ]);
       }
     };
   });

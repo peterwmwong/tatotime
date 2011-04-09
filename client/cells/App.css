@@ -7,34 +7,3 @@
   color: #fff;
   font-family: Helvetica, Arial, sans-serif;
 }
-.App > .day {
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-topright: 3px;
-  -moz-border-radius-bottomright: 3px;
-  -moz-border-radius-bottomleft: 3px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  display: inline-block;
-  width: 400px;
-  background-color: #404040;
-  margin: 5px;
-  vertical-align: top;
-}
-.App > .day:nth-child(2) {
-  background-color: #4d4d4d;
-}
-.App > .day > .showTable {
-  border-collapse: collapse;
-  width: 100%;
-}
-.App > .day > .showTable td {
-  padding: 5px;
-}
-.App > .day > .showTable td.time {
-  width: 80px;
-}
-.App > .day > .showTable td.network {
-  width: 35px;
-}

@@ -1,0 +1,31 @@
+.ThreeDayView > .day {
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  display: inline-block;
+  width: 400px;
+  background-color: #404040;
+  margin: 5px;
+  vertical-align: top;
+}
+.ThreeDayView > .day:nth-child(2) {
+  background-color: #4d4d4d;
+}
+.ThreeDayView > .day > .showTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+.ThreeDayView > .day > .showTable td {
+  padding: 5px;
+}
+.ThreeDayView > .day > .showTable td.time {
+  width: 80px;
+}
+.ThreeDayView > .day > .showTable td.network {
+  width: 35px;
+}

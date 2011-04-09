@@ -9,6 +9,7 @@ client.password = 'tatotime'
 client.connect()
 
 client.query 'USE tatotime'
+client.query 'delete from showInfo'
 
 L = console.log.bind console
 E = console.error.bind console
@@ -30,12 +31,12 @@ http.get
       try
         for day in result.DAY
           for t in [].concat day.time
-            d = new Date "#{day['@'].attr} #{t['@'].attr}"
-            for s in [].concat t.show
-              title = s['@'].name
-              client.query insertQuery,
-                [s.sid, title, false, s.ep, s.network,"#{d.getFullYear()}-#{d.getMonth()}-#{d.getDate()} #{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"]
-              L "#{d} #{title}"
+            if (d = new Date "#{day['@'].attr} #{t['@'].attr}").getHours()>=20
+              for s in [].concat t.show
+                title = s['@'].name
+                client.query insertQuery,
+                  [s.sid, title, false, s.ep, s.network,"#{d.getUTCFullYear()}-#{d.getUTCMonth()+1}-#{d.getUTCDate()} #{d.getUTCHours()}:#{d.getUTCMinutes()}:#{d.getUTCSeconds()}"]
+                L "#{d} #{title}"
       catch ex
         L "Exception: ",ex
       finally

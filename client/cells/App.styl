@@ -1,5 +1,4 @@
 @import 'mixins/colors';
-@import 'mixins/border';
 
 .App
   position absolute
@@ -10,25 +9,3 @@
   color text-color
   font-family Helvetica, Arial, sans-serif
 
-  > .day
-    border-radius 3px
-    display inline-block
-    width 400px
-    background-color bg-color
-    margin 5px
-    vertical-align top
-
-    &:nth-child(2)
-      background-color bg-color-light
-
-    > .showTable
-      border-collapse collapse
-      width 100%
-
-      td
-        padding 5px
-        
-        &.time
-          width 80px
-        &.network
-          width 35px
