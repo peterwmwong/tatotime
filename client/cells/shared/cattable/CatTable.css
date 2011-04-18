@@ -1,0 +1,42 @@
+.CatTable {
+  color: #fff;
+  font-size: 12px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.CatTable > table {
+  width: 100%;
+  border-spacing: 50px;
+}
+.CatTable > table > tbody > tr {
+  height: 40px;
+  color: #888;
+}
+.CatTable > table > tbody > tr.odd > td {
+  background-color: #333;
+}
+.CatTable > table > tbody > tr.categorySpacer {
+  background-color: transparent;
+  height: 8px;
+}
+.CatTable > table > tbody > tr > td.colSpacer {
+  background-color: transparent;
+  width: 5px;
+}
+.CatTable > table > tbody > tr > td#header {
+  background-color: #222;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  width: 75px;
+  padding: 7px;
+}
+.CatTable > table > tbody > tr > td.col {
+  padding: 5px;
+}

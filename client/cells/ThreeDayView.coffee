@@ -1,4 +1,4 @@
-cell.define ['data/ShowService'], (ShowService)->
+cell.define ['data/ShowService','shared/cattable/CatTable'], (ShowService,CatTable)->
 
   msInDay = 1000*60*60*24
   today = new Date()
@@ -15,7 +15,14 @@ cell.define ['data/ShowService'], (ShowService)->
     "#{hours}:#{minutes} <span class='ampm'>#{if isPM then "PM" else "AM"}</span>"
 
   render: (R)->
-    ShowService.getShowsForDate today,(shows)->
+    ShowService.getShowsForDate today,(tsmap)->
+      timeslots = (ts for ts,v of)
+      R.async R.cell CatTable,
+        categories: [shows]
+        columns: ['network','title']
+        getMembers: (cat,model)->tsmap[cat]
+
+      ###
       R.async "
         <div class='day'>
           <table class='showTable'>
@@ -38,4 +45,5 @@ cell.define ['data/ShowService'], (ShowService)->
           </table>
         </div>
       "
+      ###
 

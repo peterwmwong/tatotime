@@ -1,0 +1,44 @@
+@import 'mixins/pos';
+@import 'mixins/badge';
+@import 'mixins/box';
+@import 'mixins/border';
+@import 'mixins/colors';
+
+.CatTable
+  color #FFF
+  font-size 12px
+  font-family Helvetica, Arial, sans-serif
+
+  > table
+    width 100%
+    border-spacing 50px 
+
+    > tbody > tr
+      height 40px
+      color text-disabled-color
+
+      &.odd > td
+        background-color #333
+
+      &.categorySpacer
+        background-color transparent
+        height 8px
+
+      > td
+        &.colSpacer
+          background-color transparent
+          width 5px
+
+        &#header
+          background-color shadow-color
+          border-radius 3px
+          font-size 12px
+          font-weight bold
+          width 75px
+          padding 7px
+
+        &.col
+          padding 5px
+
+
+        
