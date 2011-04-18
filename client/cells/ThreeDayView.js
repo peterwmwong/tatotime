@@ -20,7 +20,7 @@
       render: function(R) {
         return ShowService.getShowsForDate(today, function(shows) {
           var d;
-          return R.async("        <div class='day'>          <table class='showTable'>            <thead>              <tr>                <td class='header' colspan='3'>                " + ((d = yesterday).getFullYear()) + "-" + (d.getMonth() + 1) + "-" + (d.getDate()) + "                </td>              </tr>            </thead>            <tbody>            " + (R(shows, function(s) {
+          return R.async("        <div class='day'>          <table class='showTable'>            <thead>              <tr>                <td class='header' colspan='3'>                " + ((d = today).getFullYear()) + "-" + (d.getMonth() + 1) + "-" + (d.getDate()) + "                </td>              </tr>            </thead>            <tbody>            " + (R(shows, function(s) {
             return "              <tr>                <td class='time'>" + (getTime(s.datetime)) + "</td>                <td class='network'>" + s.network + "</td>                <td class='name'>" + s.title + "</td>              </tr>            ";
           })) + "            </tbody>          </table>        </div>      ");
         });

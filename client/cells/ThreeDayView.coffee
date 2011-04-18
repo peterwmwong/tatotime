@@ -22,7 +22,7 @@ cell.define ['data/ShowService'], (ShowService)->
             <thead>
               <tr>
                 <td class='header' colspan='3'>
-                #{(d = yesterday).getFullYear()}-#{d.getMonth()+1}-#{d.getDate()}
+                #{(d = today).getFullYear()}-#{d.getMonth()+1}-#{d.getDate()}
                 </td>
               </tr>
             </thead>
