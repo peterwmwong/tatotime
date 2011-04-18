@@ -1,54 +1,15 @@
 (function() {
-  define(function() {
-    var toDateTime;
-    toDateTime = function(d) {
-      d = new Date(d);
-      return "" + (d.getUTCFullYear()) + "-" + (d.getUTCMonth() + 1) + "-" + (d.getUTCDate()) + " " + (d.getUTCHours()) + ":" + (d.getUTCMinutes()) + ":" + (d.getUTCSeconds());
+  define(['require'], function(require) {
+    var baseUrl, toDate;
+    baseUrl = 'http://tatotime_showinfo_dev.s3.amazonaws.com/shows/bydate/';
+    toDate = function(d) {
+      return "" + (d.getFullYear()) + "-" + (d.getMonth() + 1) + "-" + (d.getDate());
     };
     return {
-      getShows: function(from, to, done) {
-        return done([
-          {
-            date: '2011-04-04',
-            shows: [
-              {
-                title: 'Nikita',
-                datetime: '2011-04-04 20:30:00',
-                network: 'CW'
-              }, {
-                title: 'Hellcats',
-                datetime: '2011-04-04 21:30:00',
-                network: 'CW'
-              }
-            ]
-          }, {
-            date: '2011-04-05',
-            shows: [
-              {
-                title: 'The Event',
-                datetime: '2011-04-05 21:00:00',
-                network: 'NBC'
-              }, {
-                title: 'The Vampire Diaries slkdjflksdjf sldkfjls dflkjfdlkj sldkfj slkfjl sldkfj',
-                datetime: '2011-04-05 22:00:00',
-                network: 'CW'
-              }
-            ]
-          }, {
-            date: '2011-04-05',
-            shows: [
-              {
-                title: 'Entourage',
-                datetime: '2011-04-06 22:00:00',
-                network: 'HBO'
-              }, {
-                title: 'True Blood',
-                datetime: '2011-04-06 23:30:00',
-                network: 'HBO'
-              }
-            ]
-          }
-        ]);
+      getShowsForDate: function(date, done) {
+        return require(["" + baseUrl + (toDate(date)) + ".json"], function(day) {
+          return done(day.shows);
+        });
       }
     };
   });

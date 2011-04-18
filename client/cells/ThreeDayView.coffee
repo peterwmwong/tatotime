@@ -1,9 +1,9 @@
 cell.define ['data/ShowService'], (ShowService)->
 
-  now = Date.now()
   msInDay = 1000*60*60*24
-  fromDate = toDateTime(now - msInDay)
-  toDate = toDateTime(now + msInDay)
+  today = new Date()
+  yesterday= new Date today.valueOf() - msInDay
+  tomorrow = new Date today.valueOf() + msInDay
 
   getTime = (ts)->
     d = new Date ts
@@ -12,24 +12,30 @@ cell.define ['data/ShowService'], (ShowService)->
     minutes = d.getMinutes()
     if minutes < 10
       minutes = '0'+minutes
-    "#{hours}:#{minutes} #{if isPM then "PM" else "AM"}"
+    "#{hours}:#{minutes} <span class='ampm'>#{if isPM then "PM" else "AM"}</span>"
 
   render: (R)->
-    ShowService.getShows fromDate,toDate,(days)->
-      R.async R days, (d)->
-        """
+    ShowService.getShowsForDate today,(shows)->
+      R.async "
         <div class='day'>
           <table class='showTable'>
-            <tbody>
-            #{R d.shows, (s)-> "
+            <thead>
               <tr>
-                <td class='time'>#{getTime s.time}</td>
+                <td class='header' colspan='3'>
+                #{(d = yesterday).getFullYear()}-#{d.getMonth()+1}-#{d.getDate()}
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+            #{R shows, (s)->"
+              <tr>
+                <td class='time'>#{getTime s.datetime}</td>
                 <td class='network'>#{s.network}</td>
-                <td class='name'>#{s.name}</td>
+                <td class='name'>#{s.title}</td>
               </tr>
             "}
             </tbody>
           </table>
         </div>
-        """
+      "
 

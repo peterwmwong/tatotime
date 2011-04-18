@@ -10,7 +10,7 @@ if typeof process.argv[2] != 'string'
 putjson = do->
   client = require('knox').createClient JSON.parse fs.readFileSync process.argv[2], 'ascii'
   (name,jsonObj)->
-    gzip "$tatotime_shows_bydate(#{JSON.stringify jsonObj});", (gzerr,gzjson)->
+    gzip "define(#{JSON.stringify shows:jsonObj});", (gzerr,gzjson)->
       req = client.put "/shows/bydate/#{name}.json",
         'Content-Length': gzjson.length
         'Content-Type': 'application/javascript'
