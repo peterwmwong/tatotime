@@ -10,7 +10,7 @@ if typeof process.argv[2] != 'string'
 putjson = do->
   client = require('knox').createClient JSON.parse fs.readFileSync process.argv[2], 'ascii'
   (name,jsonObj)->
-    gzip "$tatotime_shows_bydate([#{jsonObj}]);", (gzerr,gzjson)->
+    gzip "$tatotime_shows_bydate(#{JSON.stringify jsonObj});", (gzerr,gzjson)->
       req = client.put "/shows/bydate/#{name}.json",
         'Content-Length': gzjson.length
         'Content-Type': 'application/javascript'
@@ -49,10 +49,13 @@ isRerun = do->
         host: 'services.tvrage.com'
         port: 80
         path: "/tools/quickinfo.php?sid=#{s.sid}&ep=#{s.ep}"
-      cb = (res)-> res.on 'data', (data)->
-        match = airDateRegex.exec data
-        edb = db[s.sid] or (db[s.sid] = {})
-        done undefined, (edb[s.ep] = match?[1]) != makeDate(sdate)
+      cb = (res)->
+        qidata = ""
+        res.on 'data', (data)-> qidata += data.toString()
+        res.on 'end', ->
+          match = airDateRegex.exec qidata
+          edb = db[s.sid] or (db[s.sid] = {})
+          done undefined, (edb[s.ep] = match?[1]) != makeDate(sdate)
       http.get(opts,cb).on 'error', done
 
 L "--- Downloading full schedule ---"
@@ -68,38 +71,38 @@ http.get
       L "--- Parsing full schedule ---"
       if err then return E 'ERROR: ', err
       try
-        for day in result.DAY
+        for day in result.DAY then do->
           writeJson = do->
             date = new Date day['@'].attr
             name = "#{date.getFullYear()}-#{date.getMonth()+1}-#{date.getDate()}"
             (data)-> putjson name, data
-          jsonResult = [""]
-          dayParsed = [false]
-          waiting = [0]
+          dayResults = []
+          dayParsed = false
+          waiting = 0
 
           for t in [].concat day.time
             if (d = new Date "#{day['@'].attr} #{t['@'].attr} EST").getHours()>=20
               d.setHours d.getHours()-1 # EST -> CST
               for s in [].concat t.show
-                waiting[0]++
-                isRerun s, d, do(d,s,writeJson,jsonResult,dayParsed,waiting)-> (e,rerun)->
-                  waiting[0]--
-                  if jsonResult[0].length > 0
-                    jsonResult[0] += ','
-                  jsonResult[0] += JSON.stringify
-                    sid: s.sid
-                    title: s['@'].name
-                    eptitle: s.title
-                    rerun: rerun
-                    ep:s.ep
-                    network:s.network
-                    datetime:d
+                waiting++
+                isRerun s, d, do(d,s)-> (e,rerun)->
+                  waiting--
+                  if e? then E "!!! Error determining rerun for show: '#{s['@'].name}', ep: '#{s.ep}'"
+                  else
+                    dayResults.push
+                      sid: s.sid
+                      title: s['@'].name
+                      eptitle: s.title
+                      rerun: rerun
+                      ep:s.ep
+                      network:s.network
+                      datetime:d
 
-                  if dayParsed[0] and waiting[0] == 0
-                    writeJson jsonResult[0]
-          dayParsed[0] = true
+                  if dayParsed and waiting == 0
+                    writeJson dayResults
+          dayParsed = true
       catch ex
-        L "Exception: ",ex?.stack
+        E "!!! Error parsing full schedule: ",ex?.stack or ex
       return
 
     res.on 'data', (data)-> parser.parseBuffer data, false
