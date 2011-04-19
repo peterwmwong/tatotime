@@ -36,7 +36,7 @@
 
   > table
     width 100%
-    border-spacing 50px 
+    border-spacing 50px
 
     > tbody > tr
       height 40px
@@ -49,15 +49,14 @@
         background-color transparent
 
         > td
+          display block
           position relative
 
           &::after
             content ""
-            abspos 22px -10px 0px -10px
+            abspos 22px false 0px -10px
+            width 650px
             border-top 2px solid bg-color-dark
-
-      &:first-child > #header::before
-        border-top 0
         
       > td
         &.colSpacer

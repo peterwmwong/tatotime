@@ -57,19 +57,17 @@
   background-color: transparent;
 }
 .CatTable > table > tbody > tr.categorySpacer > td {
+  display: block;
   position: relative;
 }
 .CatTable > table > tbody > tr.categorySpacer > td::after {
   content: "";
   position: absolute;
   top: 22px;
-  right: -10px;
   bottom: 0px;
   left: -10px;
+  width: 650px;
   border-top: 2px solid #333;
-}
-.CatTable > table > tbody > tr:first-child > #header::before {
-  border-top: 0;
 }
 .CatTable > table > tbody > tr > td.colSpacer {
   background-color: transparent;

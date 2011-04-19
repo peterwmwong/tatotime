@@ -36,7 +36,7 @@ cell.define ->
             R catMembers?.length > 0 and "
               #{R numRenderedGroups++ > 0 and "
                 <tr class='categorySpacer'>
-                  <td colspan='#{(@options.columns?.length or 0)+2}'> </td>
+                  <td colspan='#{(@options.columns?.length or 0)+2}'></td>
                 </tr>
               "}
               <tr class='category #{oddEven()}'>
