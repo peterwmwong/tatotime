@@ -1,11 +1,10 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans:bold);
 .ThreeDayView {
   text-align: center;
 }
 .ThreeDayView > .day {
-  -webkit-box-shadow: 0px 1px 5px #222;
-  -moz-box-shadow: 0px 1px 5px #222;
-  box-shadow: 0px 1px 5px #222;
+  -webkit-box-shadow: 0px 2px 5px #222;
+  -moz-box-shadow: 0px 2px 5px #222;
+  box-shadow: 0px 2px 5px #222;
   -moz-border-radius-topleft: 3px;
   -moz-border-radius-topright: 3px;
   -moz-border-radius-bottomright: 3px;
@@ -14,43 +13,30 @@
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
-  width: 400px;
-  background-color: #404040;
-  margin: 10px auto 10px;
-  padding: 10px;
+  width: 600px;
+  background-color: rgba(64,64,64,0.7);
+  margin: 15px auto 15px;
+  padding: 5px 10px 10px 10px;
   vertical-align: top;
 }
-.ThreeDayView > .day > .showTable {
+.ThreeDayView > .day > table {
   border-collapse: collapse;
   text-align: left;
   width: 100%;
 }
-.ThreeDayView > .day > .showTable > thead > tr > td.header {
-  font: bold 20px "Droid Sans", sans-serif;
-  color: #bbb;
-  padding: 5px 0 5px 5px;
-  border-bottom: 1px solid #666;
-  letter-spacing: 2px;
-  text-shadow: 0px 1px 1px #222;
-}
-.ThreeDayView > .day > .showTable > tbody > tr:nth-child(2n) {
-  background-color: #3a3a3a;
-}
-.ThreeDayView > .day > .showTable > tbody > tr > td {
+.ThreeDayView > .day > table > tbody > tr > td {
   vertical-align: middle;
   padding: 5px;
   height: 30px;
 }
-.ThreeDayView > .day > .showTable > tbody > tr > td.time {
-  font-size: 12px;
-  color: #bbb;
-  width: 50px;
-}
-.ThreeDayView > .day > .showTable > tbody > tr > td.time > .ampm {
-  font-size: 9px;
-}
-.ThreeDayView > .day > .showTable > tbody > tr > td.network {
+.ThreeDayView > .day > table > tbody > tr > td.network {
+  padding: 0 5px 0 10px;
   font-size: 10px;
-  color: #bbb;
+  color: #888;
+  line-height: 12px;
   width: 35px;
+}
+.ThreeDayView > .day > table > tbody > tr > td.title {
+  font-size: 16px;
+  color: #bbb;
 }
