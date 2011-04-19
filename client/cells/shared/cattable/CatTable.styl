@@ -1,0 +1,86 @@
+@import 'mixins/pos';
+@import 'mixins/badge';
+@import 'mixins/box';
+@import 'mixins/border';
+@import 'mixins/colors';
+@css{ @import url(http://fonts.googleapis.com/css?family=Anton); }
+
+.CatTable
+  color #FFF
+  font-size 12px
+  font-family Helvetica, Arial, sans-serif
+  darkcolor = shadow-color + #161616
+  position relative
+
+  > .title
+    abspos 6px 0px 0px 28px
+    color text-disabled-color
+    font bold 28px sans-serif
+    padding 0px 0px 0px 15px
+    text-shadow 0px 1px 0px #944, 0px -1px 0px shadow-color
+    height 0px
+    overflow visible
+    text-align left
+    line-height 24px
+    z-index 1
+
+    &::before
+      content ""
+      border-radius 1px 1px 8px 8px
+      abspos -7px false false 2px
+      height 40px
+      width 110px
+      background-color #663333
+      box-shadow 0px 1px 3px shadow-color
+      z-index -1
+
+  > table
+    width 100%
+    border-spacing 50px 
+
+    > tbody > tr
+      height 40px
+      color text-disabled-color
+
+      &.odd > td
+        background-color bg-color - #080808
+
+      &.categorySpacer
+        background-color transparent
+
+        > td
+          position relative
+
+          &::after
+            content ""
+            abspos 22px -10px 0px -10px
+            border-top 2px solid bg-color-dark
+
+      &:first-child > #header::before
+        border-top 0
+        
+      > td
+        &.colSpacer
+          background-color transparent
+          width 5px
+
+        &#header
+          font 20px 'Anton', sans-serif
+          background-color transparent
+          border-radius 3px
+          color bg-color-dark
+          padding 2px
+          position relative
+          font-size 70px
+          text-align center
+          vertical-align middle
+          letter-spacing -2px
+          text-shadow #555 0px 1px 0px, shadow-color 0px -1px 0px
+          width 150px
+
+        &.col
+          padding 5px
+          vertical-align middle
+
+
+        
