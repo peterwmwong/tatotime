@@ -19,12 +19,27 @@
     return {
       getShowsForDate: function(date, done) {
         return require(["" + baseUrl + (toDate(date)) + ".json"], function(day) {
-          var s, tsmap, _i, _len, _name, _ref, _ref2;
+          var s, shows, ts, tsmap, _i, _len, _name, _ref, _ref2;
           tsmap = {};
           _ref = day.shows;
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             s = _ref[_i];
             ((_ref2 = tsmap[_name = getTime(s.datetime)]) != null ? _ref2 : tsmap[_name] = []).push(s);
+          }
+          for (ts in tsmap) {
+            shows = tsmap[ts];
+            shows.sort(function(_arg, _arg2) {
+              var a, b;
+              a = _arg.title;
+              b = _arg2.title;
+              if (a < b) {
+                return -1;
+              } else if (a > b) {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
           }
           return done(tsmap);
         });

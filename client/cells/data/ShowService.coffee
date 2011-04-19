@@ -19,5 +19,10 @@ define ['require'], (require)->
       tsmap = {}
       for s in day.shows
         (tsmap[getTime s.datetime] ?= []).push s
+      for ts,shows of tsmap
+        shows.sort ({title:a},{title:b})->
+          if a < b then -1
+          else if a > b then 1
+          else 0
       done tsmap
 
