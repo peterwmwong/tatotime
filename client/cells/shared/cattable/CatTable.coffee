@@ -1,4 +1,5 @@
 cell.define ->
+  $('head').append "<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>"
   initialize: ->
     @options.columns ?= ['network','title']
 

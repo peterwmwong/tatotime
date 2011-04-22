@@ -1,39 +1,28 @@
 (function() {
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   cell.define(function() {
+    $('head').append("<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>");
     return {
       initialize: function() {
         var k, v, _base, _base2, _base3, _ref, _ref2, _ref3;
-                if ((_ref = (_base = this.options).columns) != null) {
-          _ref;
-        } else {
-          _base.columns = ['network', 'title'];
+        (_ref = (_base = this.options).columns) != null ? _ref : _base.columns = ['network', 'title'];
+        (_ref2 = (_base2 = this.options).categories) != null ? _ref2 : _base2.categories = {
+          '7:00': '7:00',
+          '7:30': '7:30',
+          '8:00': '8:00'
         };
-                if ((_ref2 = (_base2 = this.options).categories) != null) {
-          _ref2;
-        } else {
-          _base2.categories = {
-            '7:00': '7:00',
-            '7:30': '7:30',
-            '8:00': '8:00'
+        (_ref3 = (_base3 = this.options).getMembers) != null ? _ref3 : _base3.getMembers = (function() {
+          var make;
+          make = function(net, title) {
+            return {
+              network: net,
+              title: title
+            };
           };
-        };
-                if ((_ref3 = (_base3 = this.options).getMembers) != null) {
-          _ref3;
-        } else {
-          _base3.getMembers = (function() {
-            var make;
-            make = function(net, title) {
-              return {
-                network: net,
-                title: title
-              };
-            };
-            return function(cat, m) {
-              return [make('ABC', 'Dancing With the Stars (US)'), make('FOX', 'House'), make('CBS', 'How I Met Your Mother')];
-            };
-          })();
-        };
+          return function(cat, m) {
+            return [make('ABC', 'Dancing With the Stars (US)'), make('FOX', 'House'), make('CBS', 'How I Met Your Mother')];
+          };
+        })();
         return this._categoryNames = (function() {
           var _ref, _results;
           _ref = this.options.categories;
