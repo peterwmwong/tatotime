@@ -10,7 +10,7 @@ if typeof process.argv[2] != 'string'
 putjson = do->
   client = require('knox').createClient JSON.parse fs.readFileSync process.argv[2], 'ascii'
   (name,jsonObj)->
-    gzip "define(#{JSON.stringify shows:jsonObj});", (gzerr,gzjson)->
+    gzip "define(#{JSON.stringify jsonObj});", (gzerr,gzjson)->
       req = client.put "/shows/bydate/#{name}.json",
         'Content-Length': gzjson.length
         'Content-Type': 'application/javascript'
@@ -25,25 +25,10 @@ emptyBuf = new Buffer ""
 isRerun = do->
   db = {}
   airDateRegex = /Episode Info\@.*\^(.*)/
-  makeDate = (d)->
-    month = switch d.getMonth()
-      when 0 then 'Jan'
-      when 1 then 'Feb'
-      when 2 then 'Mar'
-      when 3 then 'Apr'
-      when 4 then 'May'
-      when 5 then 'Jun'
-      when 6 then 'Jul'
-      when 7 then 'Aug'
-      when 8 then 'Sep'
-      when 9 then 'Oct'
-      when 10 then 'Nov'
-      when 11 then 'Dec'
-    "#{d.getDate()}/#{month}/#{d.getFullYear()}"
-
   (s, sdate, done)->
+    sdate = new Date(sdate.getFullYear(),sdate.getMonth(),sdate.getDate())
     if (airdate = db[s.sid]?[s.ep])?
-      done undefined, airdate != (mdate = makeDate(sdate))
+      done undefined, airdate < sdate.valueOf()
     else
       opts =
         host: 'services.tvrage.com'
@@ -55,8 +40,19 @@ isRerun = do->
         res.on 'end', ->
           match = airDateRegex.exec qidata
           edb = db[s.sid] or (db[s.sid] = {})
-          done undefined, (edb[s.ep] = match?[1]) != makeDate(sdate)
+          datems = new Date(match?[1]).valueOf()
+          done undefined, isNaN(datems) and false or (edb[s.ep] = datems) < sdate.valueOf()
       http.get(opts,cb).on 'error', done
+
+normalizeTime = do->
+  r = /^0?(\d+:\d+) (am|pm)$/
+  (timeString)->
+    r.exec(timeString)?[1]
+
+showComparator = ({title:a},{title:b})->
+    if a < b then -1
+    else if a > b then 1
+    else 0
 
 L "--- Downloading full schedule ---"
 http.get
@@ -76,29 +72,32 @@ http.get
             date = new Date day['@'].attr
             name = "#{date.getFullYear()}-#{date.getMonth()+1}-#{date.getDate()}"
             (data)-> putjson name, data
-          dayResults = []
+          dayResults = {}
           dayParsed = false
           waiting = 0
 
           for t in [].concat day.time
-            if (d = new Date "#{day['@'].attr} #{t['@'].attr} EST").getHours()>=20
+            if (d = new Date "#{day['@'].attr} #{time = t['@'].attr} EST").getHours()>=20
+              dayResults[normalizeTime(time)] = (timeResults = [])
               d.setHours d.getHours()-1 # EST -> CST
               for s in [].concat t.show
                 waiting++
-                isRerun s, d, do(d,s)-> (e,rerun)->
+                isRerun s, d, do(d,s,timeResults)-> (e,rerun)->
                   waiting--
                   if e? then E "!!! Error determining rerun for show: '#{s['@'].name}', ep: '#{s.ep}'"
                   else
-                    dayResults.push
+                    timeResults.push
                       sid: s.sid
                       title: s['@'].name
                       eptitle: s.title
                       rerun: rerun
                       ep:s.ep
                       network:s.network
-                      datetime:d
 
                   if dayParsed and waiting == 0
+                    # Sort shows
+                    for k,shows of dayResults
+                      shows.sort showComparator
                     writeJson dayResults
           dayParsed = true
       catch ex

@@ -17,6 +17,7 @@ cell.define ->
           make('FOX','House')
           make('CBS','How I Met Your Mother')
         ]
+
     @_categoryNames = (k for k,v of @options.categories)
 
   render: (R)->
