@@ -1,24 +1,10 @@
 cell.define ->
   $('head').append "<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>"
+  defaultRenderCol = (colName,col,member)->col
+
   initialize: ->
-    @options.columns ?= ['network','title']
-
-    @options.categories ?=
-        '7:00':'7:00'
-        '7:30':'7:30'
-        '8:00':'8:00'
-
-    @options.getMembers ?= do->
-        make = (net,title)->
-          network: net
-          title: title
-        (cat,m)->[
-          make('ABC','Dancing With the Stars (US)')
-          make('FOX','House')
-          make('CBS','How I Met Your Mother')
-        ]
-
     @_categoryNames = (k for k,v of @options.categories)
+    @_colRenders = typeof(rc = @options.renderColumn == 'function') and rc or defaultRenderCol
 
   render: (R)->
     numRenderedGroups = 0
@@ -31,30 +17,25 @@ cell.define ->
     #{R @options.title and "
       <div class='title'>#{@options.title}</div>
     "}
-    <table>
-      <tbody>
-        #{R @_categoryNames, (cat)=>
-            catMembers = @options.getMembers cat, @model
-            R catMembers?.length > 0 and "
-              #{R numRenderedGroups++ > 0 and "
-                <tr class='categorySpacer'>
-                  <td colspan='#{(@options.columns?.length or 0)+2}'></td>
-                </tr>
-              "}
-              <tr class='category #{oddEven()}'>
-                <td rowspan='#{catMembers.length or 0}' id='header' class='#{cat}'>
-                  <span>#{@options.categories[cat]}</span>
-                </td>
-                #{R catMembers, (member,i)=> "
-                  #{R i!=0 and "
-                    <tr class='#{oddEven()}'>
-                  "}
-                    <td class='colSpacer'> </td>
-                    #{R @options.columns, (col)=>"
-                      <td class='col #{col}'>#{member[col]}</td>
-                    "}
-              </tr>
+    <div id='categories'>
+    #{R @_categoryNames, (cat)=>
+        catMembers = @options.getMembers cat, @model
+        R catMembers?.length > 0 and "
+          <div class='category'>
+            <div class='header #{cat}'>
+              <span>#{@options.categories[cat]}</span>
+            </div>
+            <div class='members'>
+            #{R catMembers, (member)=> "
+                <div class='member'>
+                #{R @options.columns, (col)=>"
+                  <div class='col #{col}'>#{member[col]}</div>
                 "}
-        "}
+                </div>
+            "}
+            </div>
+          </div>
+    "}
+    </div>
     """
 

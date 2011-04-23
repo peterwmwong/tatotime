@@ -12,73 +12,71 @@
   position relative
 
   > .title
-    abspos 6px 0px 0px 28px
+    abspos -2px false false 28px
+    background-color #663333
+    border-radius 1px 1px 8px 8px
+    box-shadow 0px 1px 3px shadow-color
     color text-disabled-color
     font bold 28px sans-serif
-    padding 0px 0px 0px 15px
-    text-shadow 0px 1px 0px #944, 0px -1px 0px shadow-color
-    height 0px
-    overflow visible
-    text-align left
     line-height 24px
+    overflow visible
+    padding 10px 15px 10px 15px
+    text-shadow 0px 1px 0px #944, 0px -1px 0px shadow-color
+    text-align left
     z-index 1
 
-    &::before
-      content ""
-      border-radius 1px 1px 8px 8px
-      abspos -7px false false 2px
-      height 40px
-      width 110px
-      background-color #663333
-      box-shadow 0px 1px 3px shadow-color
-      z-index -1
-
-  > table
+  > #categories
     width 100%
-    border-spacing 50px
+    position relative
 
-    > tbody > tr
-      height 40px
-      color text-disabled-color
+    > .category
+      border-top 2px solid bg-color-dark
+      padding 20px 0 20px 0
+      text-align left
 
-      &.odd > td
-        background-color bg-color - #080808
+      *
+        display inline-block
 
-      &.categorySpacer
+      &:first-child
+        padding-top 0
+        border 0
+
+      > .header
         background-color transparent
+        border-radius 3px
+        color bg-color-dark
+        font 20px 'Anton', sans-serif
+        font-size 70px
+        letter-spacing -2px
+        position relative
+        text-align center
+        text-shadow #555 0px 1px 0px, shadow-color 0px -1px 0px
+        vertical-align middle
+        width 170px
 
-        > td
-          display block
-          position relative
-
-          &::after
-            content ""
-            abspos 22px false 0px -10px
-            width 650px
-            border-top 2px solid bg-color-dark
+      > .members
+        width 427px
+        vertical-align middle
         
-      > td
-        &.colSpacer
-          background-color transparent
-          width 5px
+        > .member
+          display block
+          padding 11px 0 11px 0
+          &:nth-child(2n+1)
+            background-color bg-color - #080808
 
-        &#header
-          font 20px 'Anton', sans-serif
-          background-color transparent
-          border-radius 3px
-          color bg-color-dark
-          padding 2px
-          position relative
-          font-size 70px
-          text-align center
-          vertical-align middle
-          letter-spacing -2px
-          text-shadow #555 0px 1px 0px, shadow-color 0px -1px 0px
-          width 150px
+          >.col
+            vertical-align middle
+            
+            &.network
+              color text-disabled-color
+              font-size 10px
+              line-height 12px
+              padding 0 5px 0 10px
+              width 65px
 
-        &.col
-          padding 5px
-          vertical-align middle
-
-
+            &.title
+              color text-color-dark
+              line-height 16px
+              font-size 16px
+              clear both
         

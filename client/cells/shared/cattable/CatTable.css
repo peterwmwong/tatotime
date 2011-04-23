@@ -1,99 +1,13 @@
-.CatTable {
-  color: #fff;
-  font-size: 12px;
-  font-family: Helvetica, Arial, sans-serif;
-  position: relative;
-}
-.CatTable > .title {
-  position: absolute;
-  top: 6px;
-  right: 0px;
-  bottom: 0px;
-  left: 28px;
-  color: #888;
-  font: bold 28px sans-serif;
-  padding: 0px 0px 0px 15px;
-  text-shadow: 0px 1px 0px #944, 0px -1px 0px #222;
-  height: 0px;
-  overflow: visible;
-  text-align: left;
-  line-height: 24px;
-  z-index: 1;
-}
-.CatTable > .title::before {
-  content: "";
-  -moz-border-radius-topleft: 1px;
-  -moz-border-radius-topright: 1px;
-  -moz-border-radius-bottomright: 8px;
-  -moz-border-radius-bottomleft: 8px;
-  border-top-left-radius: 1px;
-  border-top-right-radius: 1px;
-  border-bottom-right-radius: 8px;
-  border-bottom-left-radius: 8px;
-  position: absolute;
-  top: -7px;
-  left: 2px;
-  height: 40px;
-  width: 110px;
-  background-color: #633;
-  -webkit-box-shadow: 0px 1px 3px #222;
-  -moz-box-shadow: 0px 1px 3px #222;
-  box-shadow: 0px 1px 3px #222;
-  z-index: -1;
-}
-.CatTable > table {
-  width: 100%;
-  border-spacing: 50px;
-}
-.CatTable > table > tbody > tr {
-  height: 40px;
-  color: #888;
-}
-.CatTable > table > tbody > tr.odd > td {
-  background-color: #383838;
-}
-.CatTable > table > tbody > tr.categorySpacer {
-  background-color: transparent;
-}
-.CatTable > table > tbody > tr.categorySpacer > td {
-  display: block;
-  position: relative;
-}
-.CatTable > table > tbody > tr.categorySpacer > td::after {
-  content: "";
-  position: absolute;
-  top: 22px;
-  bottom: 0px;
-  left: -10px;
-  width: 650px;
-  border-top: 2px solid #333;
-}
-.CatTable > table > tbody > tr > td.colSpacer {
-  background-color: transparent;
-  width: 5px;
-}
-.CatTable > table > tbody > tr > td#header {
-  font: 20px "Anton", sans-serif;
-  background-color: transparent;
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-topright: 3px;
-  -moz-border-radius-bottomright: 3px;
-  -moz-border-radius-bottomleft: 3px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  color: #333;
-  padding: 2px;
-  position: relative;
-  font-size: 70px;
-  text-align: center;
-  vertical-align: middle;
-  letter-spacing: -2px;
-  text-shadow: #555 0px 1px 0px, #222 0px -1px 0px;
-  width: 150px;
-}
-.CatTable > table > tbody > tr > td.col {
-  padding: 5px;
-  vertical-align: middle;
-}
+.CatTable{color:#fff;font-size:12px;font-family:Helvetica,Arial,sans-serif;position:relative;}
+.CatTable > .title{position:absolute;top:-2px;left:28px;background-color:#633;-moz-border-radius-topleft:1px;-moz-border-radius-topright:1px;-moz-border-radius-bottomright:8px;-moz-border-radius-bottomleft:8px;border-top-left-radius:1px;border-top-right-radius:1px;border-bottom-right-radius:8px;border-bottom-left-radius:8px;-webkit-box-shadow:0 1px 3px #222;-moz-box-shadow:0 1px 3px #222;box-shadow:0 1px 3px #222;color:#888;font:bold 28px sans-serif;line-height:24px;overflow:visible;padding:10px 15px 10px 15px;text-shadow:0 1px 0 #944,0 -1px 0 #222;text-align:left;z-index:1}
+.CatTable > #categories{width:100%;position:relative;}
+.CatTable > #categories > .category{border-top:2px solid #333;padding:20px 0 20px 0;text-align:left;}
+.CatTable > #categories > .category *{display:inline-block}
+.CatTable > #categories > .category:first-child{padding-top:0;border:0}
+.CatTable > #categories > .category > .header{background-color:transparent;-moz-border-radius-topleft:3px;-moz-border-radius-topright:3px;-moz-border-radius-bottomright:3px;-moz-border-radius-bottomleft:3px;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom-right-radius:3px;border-bottom-left-radius:3px;color:#333;font:20px "Anton",sans-serif;font-size:70px;letter-spacing:-2px;position:relative;text-align:center;text-shadow:#555 0 1px 0,#222 0 -1px 0;vertical-align:middle;width:170px}
+.CatTable > #categories > .category > .members{width:427px;vertical-align:middle;}
+.CatTable > #categories > .category > .members > .member{display:block;padding:11px 0 11px 0;}
+.CatTable > #categories > .category > .members > .member:nth-child(2n+1){background-color:#383838}
+.CatTable > #categories > .category > .members > .member >.col{vertical-align:middle;}
+.CatTable > #categories > .category > .members > .member >.col.network{color:#888;font-size:10px;line-height:12px;padding:0 5px 0 10px;width:65px}
+.CatTable > #categories > .category > .members > .member >.col.title{color:#bbb;line-height:16px;font-size:16px;clear:both}
