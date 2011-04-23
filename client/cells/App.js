@@ -1,5 +1,5 @@
 (function() {
-  cell.define(['./ThreeDayView'], function(ThreeDayView) {
+  cell.define(['./ThreeDayView', 'data/ShowService', 'shared/cattable/CatTable'], function(ThreeDayView) {
     $('head').append("<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>");
     return {
       render: function(R) {
