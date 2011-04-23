@@ -1,6 +1,6 @@
 (function() {
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-  cell.define(function() {
+  cell.define((function() {
     var defaultRenderCol;
     $('head').append("<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>");
     defaultRenderCol = function(colName, col, member) {
@@ -46,5 +46,5 @@
         }, this))) + "\n</div>";
       }
     };
-  });
+  })());
 }).call(this);
