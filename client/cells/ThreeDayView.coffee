@@ -1,4 +1,4 @@
-cell.define ['data/ShowService','shared/cattable/CatTable'], (ShowService,CatTable)->
+define ['data/ShowService','C!shared/cattable/CatTable'], (ShowService,CatTable)->
 
   msInDay = 1000*60*60*24
   today = new Date()

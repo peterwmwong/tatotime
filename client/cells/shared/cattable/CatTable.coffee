@@ -1,5 +1,5 @@
-cell.define do->
-  $('head').append "<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>"
+define [],->
+  $?('head').append "<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>"
   defaultRenderCol = (colName,col,member)->col
 
   initialize: ->
