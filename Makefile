@@ -61,7 +61,7 @@ dev-test: $(coffee)
 #-------------------------------------------------------------------
 # BUILD
 #------------------------------------------------------------------- 
-client/cells/bootstrap.js:
+client/cells/bootstrap.js: client/cells/C.js client/cells/C-pluginBuilder.js
 	$(requirejsBuild) name=C!App out=client/cells/bootstrap.js baseUrl=client/cells includeRequire=true
 
 #-------------------------------------------------------------------

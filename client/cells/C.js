@@ -8,7 +8,7 @@
     };
     $ = window.$ || function() {};
     return define('C', [], function() {
-      var C, bind, err, extendObj, identity, inherits, uniqueId, _ref;
+      var C, bind, err, extendObj, identity, inherits, uniqueId, __preinstalledCells__, _ref;
       bind = (function() {
         var fbind, slice;
         slice = Array.prototype.slice;
@@ -346,20 +346,24 @@
         }
       });
       return {
+        /*
+        Exports
+        */
+        __preinstalledCells__: __preinstalledCells__ = [],
+        pluginBuilder: 'C-pluginBuilder',
         load: (function() {
           var moduleNameRegex;
           moduleNameRegex = /(.*\/)?(.*)/;
           return function(name, req, load, config) {
             req([name], function(CDef) {
-              var cellName, _ref;
-              if (config.isBuild) {
-                load();
-              } else if (typeof CDef !== 'object') {
+              var _ref;
+              if (typeof CDef !== 'object') {
                 err("Couldn't load " + name + " C. C definitions should be objects, but instead was " + (typeof CDef));
               } else {
-                cellName = moduleNameRegex.exec(name)[2];
-                (_ref = CDef.css_href) != null ? _ref : CDef.css_href = req.toUrl("" + name + ".css");
-                load(config.isBuild && CDef || C.extend(CDef, cellName));
+                if (__preinstalledCells__.indexOf(name) === -1) {
+                  (_ref = CDef.css_href) != null ? _ref : CDef.css_href = req.toUrl("" + name + ".css");
+                }
+                load(C.extend(CDef, moduleNameRegex.exec(name)[2]));
               }
             });
           };
