@@ -1,22 +1,22 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 define([], (function() {
-  var DefaultCategory, DefaultMember;
   if (typeof $ === "function") {
     $('head').append("<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'/>");
   }
-  DefaultMember = C.extend({
-    'render <div class="member">': function(R) {
-      return R(this.options.columns, __bind(function(col) {
-        return "<div class='col " + col + "'>" + this.model[col] + "</div>";
-      }, this));
-    }
-  });
-  DefaultCategory = C.extend({
-    'render <span>': function() {
-      return "" + this.options.category;
-    }
-  });
   return function() {
+    var DefaultCategory, DefaultMember;
+    DefaultMember = C.extend({
+      'render <div class="member">': function(R) {
+        return R(this.options.columns, __bind(function(col) {
+          return "<div class='col " + col + "'>" + this.model[col] + "</div>";
+        }, this));
+      }
+    });
+    DefaultCategory = C.extend({
+      'render <span>': function() {
+        return "" + this.options.category;
+      }
+    });
     return {
       initialize: function() {
         var k, v, _base, _base2, _ref, _ref2;

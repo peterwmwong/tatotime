@@ -1,13 +1,13 @@
 define [], do->
   $?('head').append "<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'/>"
-  DefaultMember = C.extend
-    'render <div class="member">': (R)->
-      R @options.columns, (col)=>
-        "<div class='col #{col}'>#{@model[col]}</div>"
-  DefaultCategory = C.extend
-    'render <span>': -> "#{@options.category}"
-
   ->
+    DefaultMember = C.extend
+      'render <div class="member">': (R)->
+        R @options.columns, (col)=>
+          "<div class='col #{col}'>#{@model[col]}</div>"
+    DefaultCategory = C.extend
+      'render <span>': -> "#{@options.category}"
+
     initialize: ->
       @_categoryNames = (k for k,v of @options.categories)
       @options.memberCell ?= DefaultMember
