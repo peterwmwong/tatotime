@@ -1,13 +1,6 @@
-define ['C!./ThreeDayView'], (ThreeDayView)->
-  $?('head').append "
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans'
-          rel='stylesheet'
-          type='text/css'>
-  "
+define ['C!./ThreeDayView','C!./DateNav'], (ThreeDayView, DateNav)->
   render: (R)->
     """
+    #{R DateNav}
     #{R ThreeDayView}
-    <div id='footer'>
-      <div id='tatotime'>TatoTime!</div>
-    </div>
     """

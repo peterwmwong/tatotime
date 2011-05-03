@@ -1,9 +1,11 @@
-@import 'mixins/colors';
-@import 'mixins/border';
+@import 'mixins/pos';
 @import 'mixins/box';
+@import 'mixins/border';
+@import 'mixins/colors';
 
 .ThreeDayView
   text-align center
+  overflow auto
   > .day
     box-shadow 0px 2px 5px shadow-color
     border-radius 3px
@@ -12,27 +14,72 @@
     margin 15px auto 15px
     padding 5px 10px 10px 10px
     vertical-align top
-
-    > table
-      border-collapse collapse
+    
+    > .title
+      abspos -2px false false 28px
+      background-color #663333
+      border-radius 1px 1px 8px 8px
+      box-shadow 0px 1px 3px shadow-color
+      color text-disabled-color
+      font bold 28px sans-serif
+      line-height 24px
+      overflow visible
+      padding 10px 15px 10px 15px
+      text-shadow 0px 1px 0px #944, 0px -1px 0px shadow-color
       text-align left
+      z-index 1
+
+    > #categories
       width 100%
+      position relative
 
-      > tbody > tr
+      > .category
+        border-top 2px solid bg-color-dark
+        padding 20px 0 20px 0
+        text-align left
 
-        > td
+        *
+          display inline-block
+
+        &:first-child
+          padding-top 0
+          border 0
+
+        > .header
+          background-color transparent
+          border-radius 3px
+          color bg-color-dark
+          font 20px 'Anton', sans-serif
+          font-size 70px
+          letter-spacing -2px
+          position relative
+          text-align center
+          text-shadow #555 0px 1px 0px, shadow-color 0px -1px 0px
           vertical-align middle
-          padding 5px
-          height 30px
+          width 170px
 
-          &.network
-            padding 0 5px 0 10px
-            font-size 10px
-            color text-disabled-color
-            line-height 12px
-            width 35px
+        > .members
+          width 427px
+          vertical-align middle
+          
+          > .member
+            display block
+            padding 11px 0 11px 0
+            &:nth-child(2n+1)
+              background-color bg-color - #080808
 
-          &.title
-            font-size 16px
-            color text-color-dark
+            >.col
+              vertical-align middle
+              
+              &.network
+                color text-disabled-color
+                font-size 10px
+                line-height 12px
+                padding 0 5px 0 10px
+                width 65px
 
+              &.title
+                color text-color-dark
+                line-height 16px
+                font-size 16px
+                clear both

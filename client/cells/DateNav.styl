@@ -1,0 +1,164 @@
+@import 'mixins/colors';
+@import 'mixins/border';
+@import 'mixins/box';
+@import 'mixins/pos';
+
+border-tri(borderSize = 10px, borderColor = #555)
+  content ""
+  display block
+  border-color transparent borderColor transparent transparent
+  border-style solid
+  border-width borderSize
+  height 0
+  width 0
+  z-index 2 
+
+triangle(size=8px,fgcolor,bordercolor,t=0px,r=0px)
+  &:before
+    content ""
+    abspos t r false false
+    border-tri size fgcolor
+
+  &:after
+    content ""
+    abspos t (r - 1px) false false
+    border-tri size bordercolor
+
+
+.DateNav
+  text-align center
+  > .CatTable
+    abspos 0px 0px 0px 0px
+    border-right 1px solid shadow-color
+    background-color rgba(bg-color,.7)
+    vertical-align top
+    
+    > #categories
+      border-collapse collapse
+      width 100%
+      z-index 1
+
+      > .category
+        border-bottom 1px solid bg-color-dark
+        text-align left
+        position relative
+
+        &.selected
+          triangle 8px shadow-color bg-color-dark 45% 0px
+          background-color bg-color-light
+
+          &:hover
+            background-color bg-color-light
+
+          > .header > .dateDay
+            .date
+              color text-color-light
+            .day
+              color text-color
+
+          > .members > .member
+            &::before
+              background-color divider-light + #222
+
+            > .timeslot
+              color text-color
+
+              .time
+                color text-color-dark
+
+        &:hover
+          background-color bg-color
+
+        > .header
+          display inline-block
+          padding 10px 7px 10px 13px
+          width 33px
+          position relative
+          vertical-align middle
+
+          > .dateDay
+            position relative
+            > .date
+              &::before
+                abspos 4px false false 6px
+                
+              &::after
+                abspos 4px 6px false false
+
+              &::after, &::before
+                box-shadow inset 0px 1px 1px shadow-color-dark
+                background-color bg-color-dark
+                border-radius 5px
+                content ""
+                display block
+                height 5px
+                width 5px
+
+              box-shadow 0px 2px 3px shadow-color + #080808
+              border-radius 2px
+              background-color #663333
+              color text-color-dark
+              font-size 18px
+              font-weight bold
+              text-align center
+              margin-bottom 5px
+              padding 12px 0 3px 0
+              width 100%
+              height 100%
+              vertical-align middle
+
+            > .day
+              color text-disabled-color
+              text-align center
+              font-size 14px
+              font-weight bold
+
+
+        > .members
+          display inline-block
+          padding 10px 5px 10px 0
+          width 187px
+          vertical-align middle
+
+          > .member
+            display table
+            width 100%
+            margin-top 7px
+            margin-left 5px
+            position relative
+            z-index 1
+
+            &::before
+              content ""
+              abspos -4px 10px false 0px
+              height 1px
+              background-color divider-light
+              z-index 5
+
+            &:first-child
+              margin-top 2px
+
+              &::before
+                background-color transparent
+
+            > .timeslot
+              display table-row
+              color text-color-dark
+
+              > .time
+                color text-disabled-color
+                display table-cell
+                font-style italic
+                padding 5px 5px 5px 0px
+                text-align left
+                vertical-align top 
+                width 10px
+
+              > .shows
+                display table-cell
+                vertical-align middle
+
+                > .show
+                  padding 5px
+
+

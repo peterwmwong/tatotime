@@ -40,23 +40,15 @@ endif
 #===================================================================
 #­--------------------------- TARGETS ------------------------------
 #===================================================================
-.PHONY : clean
+.PHONY : clean server
 
 all: client/cells/bootstrap.js
 
 #-------------------------------------------------------------------
 # DEV 
 #------------------------------------------------------------------- 
-dev: lib/C.coffee $(coffee)
-	mkdir -p build/
-	$(coffee) --watch -o build/ -c lib/C.coffee
-
-dev-test-server: $(coffee) $(express)
-	$(coffee) test/util/test-server.coffee
-
-dev-test: $(coffee)
-	find test/ -name '*.coffee' | xargs $(coffee) --watch -c
-
+server:
+	npm install xml2js-expat gzip knox
 
 #-------------------------------------------------------------------
 # BUILD
@@ -78,5 +70,5 @@ $(express):
 #------------------------------------------------------------------- 
 
 clean: 
-	@@rm -rf build
+	@@rm client/cells/bootstrap.*
 

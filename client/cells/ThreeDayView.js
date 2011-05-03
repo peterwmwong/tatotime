@@ -1,3 +1,4 @@
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 define(['data/ShowService', 'C!shared/cattable/CatTable'], function(ShowService, CatTable) {
   var msInDay, today, tomorrow, yesterday;
   msInDay = 1000 * 60 * 60 * 24;
@@ -18,9 +19,24 @@ define(['data/ShowService', 'C!shared/cattable/CatTable'], function(ShowService,
           title: 'Today',
           categories: timeslots,
           columns: ['network', 'title'],
-          getMembers: function(cat, model) {
-            return tsmap[cat];
-          }
+          getMembers: function(cat) {
+            return tsmap[cat].sort(function(a, b) {
+              if (a.rerun === b.rerun) {
+                return 0;
+              } else if (b.rerun) {
+                return 1;
+              } else {
+                return -1;
+              }
+            });
+          },
+          memberCell: C.extend({
+            'render <div class="member">': function(R) {
+              return R(this.options.columns, __bind(function(col) {
+                return "<div class='col " + col + " " + (R(this.model.rerun && 'rerun')) + "'>" + this.model[col] + "</div>";
+              }, this));
+            }
+          })
         }));
       });
     }

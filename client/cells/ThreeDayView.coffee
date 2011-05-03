@@ -15,4 +15,12 @@ define ['data/ShowService','C!shared/cattable/CatTable'], (ShowService,CatTable)
         title: 'Today'
         categories: timeslots
         columns: ['network','title']
-        getMembers: (cat,model)->tsmap[cat]
+        # Get and Sort (reruns below) members
+        getMembers: (cat)-> tsmap[cat].sort (a,b)->
+          if a.rerun == b.rerun then 0
+          else if b.rerun then 1
+          else -1
+        memberCell: C.extend
+          'render <div class="member">': (R)->
+            R @options.columns, (col)=>
+              "<div class='col #{col} #{R @model.rerun and 'rerun'}'>#{@model[col]}</div>"
