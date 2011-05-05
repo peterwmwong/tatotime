@@ -18,7 +18,7 @@ define [], do->
       #{R @options.title and "
         <div class='title'>#{@options.title}</div>
       "}
-      <div id='categories'>
+      <div class='categories'>
       #{R @_categoryNames, (cat)=>
           catMembers = @options.getMembers cat, @model
           R catMembers?.length > 0 and "

@@ -11,6 +11,7 @@ define(['C!shared/cattable/CatTable', 'data/ShowService'], function(CatTable, Sh
         }
         return R.async(R(CatTable, (function() {
           return {
+            "class": 'navtable',
             categories: days,
             columns: ['date', 'shows'],
             getMembers: function(day) {

@@ -6,7 +6,7 @@
 border-tri(borderSize = 10px, borderColor = #555)
   content ""
   display block
-  border-color transparent borderColor transparent transparent
+  border-color transparent transparent transparent borderColor
   border-style solid
   border-width borderSize
   height 0
@@ -21,19 +21,20 @@ triangle(size=8px,fgcolor,bordercolor,t=0px,r=0px)
 
   &:after
     content ""
-    abspos t (r - 1px) false false
+    abspos t (r + 5px) false false
     border-tri size bordercolor
 
 
 .DateNav
-  text-align center
+
   > .CatTable
-    abspos 0px 0px 0px 0px
-    border-right 1px solid shadow-color
-    background-color rgba(bg-color,.7)
+    background-color bg-color
+    border-radius 5px
     vertical-align top
+    width 250px
+    height 100%
     
-    > #categories
+    > .categories
       border-collapse collapse
       width 100%
       z-index 1
@@ -44,14 +45,21 @@ triangle(size=8px,fgcolor,bordercolor,t=0px,r=0px)
         position relative
 
         &.selected
-          triangle 8px shadow-color bg-color-dark 45% 0px
-          background-color bg-color-light
+          triangle 16px bg-color-dark bg-color-watched-show 30% -32px
+          background-color bg-color-watched-show
+
+          &:last-child
+            border-radius 0 0 5px 5px
+
+          &:first-child
+            border-radius 5px 5px 0 0
 
           &:hover
-            background-color bg-color-light
+            background-color bg-color-watched-show
 
           > .header > .dateDay
             .date
+              background-color bg-color-calendar-light
               color text-color-light
             .day
               color text-color
@@ -61,13 +69,13 @@ triangle(size=8px,fgcolor,bordercolor,t=0px,r=0px)
               background-color divider-light + #222
 
             > .timeslot
-              color text-color
+              color text-color-light
 
               .time
                 color text-color-dark
 
         &:hover
-          background-color bg-color
+          background-color bg-color + rgb(8,8,8)
 
         > .header
           display inline-block
@@ -96,7 +104,7 @@ triangle(size=8px,fgcolor,bordercolor,t=0px,r=0px)
 
               box-shadow 0px 2px 3px shadow-color + #080808
               border-radius 2px
-              background-color #663333
+              background-color bg-color-calendar
               color text-color-dark
               font-size 18px
               font-weight bold

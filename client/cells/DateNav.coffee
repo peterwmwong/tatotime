@@ -8,6 +8,7 @@ define ['C!shared/cattable/CatTable','data/ShowService'], (CatTable,ShowService)
         days[day] = day
 
       R.async R CatTable, do->
+        class:'navtable'
         categories: days
         columns: ['date','shows']
         getMembers: (day)-> dayShowsMap[day]

@@ -1,7 +1,7 @@
 define(['C!./ThreeDayView', 'C!./DateNav'], function(ThreeDayView, DateNav) {
   return {
     render: function(R) {
-      return "" + (R(DateNav)) + "\n" + (R(ThreeDayView));
+      return "<div id='midcol'>\n  " + (R(DateNav)) + "\n  " + (R(ThreeDayView)) + "\n</div>";
     }
   };
 });

@@ -38,7 +38,7 @@ define([], (function() {
         return (_ref2 = (_base2 = this.options).categoryCell) != null ? _ref2 : _base2.categoryCell = DefaultCategory;
       },
       render: function(R) {
-        return "" + (R(this.options.title && ("  <div class='title'>" + this.options.title + "</div>"))) + "\n<div id='categories'>\n" + (R(this._categoryNames, __bind(function(cat) {
+        return "" + (R(this.options.title && ("  <div class='title'>" + this.options.title + "</div>"))) + "\n<div class='categories'>\n" + (R(this._categoryNames, __bind(function(cat) {
           var catMembers;
           catMembers = this.options.getMembers(cat, this.model);
           return R((catMembers != null ? catMembers.length : void 0) > 0 && ("      <div class='category'>        <div class='header " + cat + "'>          " + (R(this.options.categoryCell, {
